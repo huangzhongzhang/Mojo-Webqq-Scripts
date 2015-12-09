@@ -1,4 +1,5 @@
 # Mojo-Webqq-Scripts
+<pre>
 使用说明：
 1.login_dba.pl
   登录脚本，用来登录qq，加载插件，已集成openqq，需后台运行。
@@ -19,3 +20,4 @@
   自动调用stop.sh和start.sh重启进程，此处只针对login_dba.pl。
   使用方法：
   sh restart_login_dba.sh
+</pre>
