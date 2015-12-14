@@ -1,8 +1,6 @@
 #!/bin/bash
-SH=$1
-
-sh -c "$SH &" &> $SH.log
-
-tail -f $SH.log
-
-exit
+SH=$1;
+>nohup.out;
+nohup $SH &;
+tail -f nohup.out;
+exit;
