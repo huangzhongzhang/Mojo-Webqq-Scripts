@@ -79,34 +79,13 @@ my $msg = $_[1];
 #$client->load("Perldoc");
 #示例 >>> print "hello world";
 
-#进退群提醒
-my $new_group_member_cout = 0;
-Mojo::IOLoop->recurring(900,sub{
-    $new_group_member_cout=0;
-});
-
-$client->on(
-    new_group_member=>sub{
-        if($new_group_member_cout>10){
-            $client->fatal("new_group_member事件触发次数超过限制");
-            return;
-        }
-        my $memer = $_[1];
-        my $displayname = $memer->displayname;
-        my $content = $displayname ne "昵称未知"?"欢迎新成员 \@$displayname 加入组织[鼓掌][鼓掌]":"欢迎新成员入群[鼓掌][鼓掌]";
-        my $group = $client->search_group(gid=>$memer->gid);
-        $group->send($content) if defined $group;
-        $new_group_member_cout++;
-    },
-    lose_group_member=>sub{
-        my $memer = $_[1];
-        my $displayname = $memer->displayname ;
-        return if $displayname eq "昵称未知";
-        my $content = "很遗憾 \@$displayname 离开了本群[流泪][流泪]";
-        my $group = $client->search_group(gid=>$memer->gid);
-        $group->send($content) if defined $group;
-    },
-);
+#加载群管理
+$client->load("GroupManage");
+#默认包含新人入群欢迎、成员离开提醒、群成员改名通知、限制发言频率、限制发图频率
+#其中加群欢迎 离群告别 群名片提醒 这些是没办法开关的
+#发送频率限制之类的 默认是不开启的 需要自己设置限制频率之类的
+#具体请参考代码以及以下链接
+#http://search.cpan.org/dist/Mojo-Webqq/doc/Webqq.pod#Mojo::Webqq::Plugin::GroupManage
 
 #smartQQ
 $client->load("SmartReply");
