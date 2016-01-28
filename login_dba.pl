@@ -16,7 +16,7 @@ use Mojo::Webqq;
 
 #推荐手机安装[QQ安全中心]APP，方便随时掌握自己帐号的情况
 
-my $qq = xxxxxxxxx;
+my $qq = 284759461;
 
 #初始化一个客户端对象，设置登录的qq号
 
@@ -30,26 +30,26 @@ login_type  =>  "qrlogin", #"qrlogin"表示二维码登录
 #注意: 腾讯可能已经关闭了帐号密码的登录方式，这种情况下只能使用二维码扫描登录
 
 #发送二维码到邮箱
-$client->load("PostQRcode",data=>{
-smtp    =>  'smtp.xxx.com', #邮箱的smtp地址
-port    =>  '25', #smtp服务器端口，默认25
-from    =>  'xxx@xxx.com', #发件人
-to      =>  'xxx@xxx.com', #收件人
-user    =>  'xxxxxxxxx', #smtp登录帐号
-pass    =>  'xxxxxxxxx', #smtp登录密码
-});
+#$client->load("PostQRcode",data=>{
+#smtp    =>  'smtp.xxx.com', #邮箱的smtp地址
+#port    =>  '25', #smtp服务器端口，默认25
+#from    =>  'xxx@xxx.com', #发件人
+#to      =>  'xxx@xxx.com', #收件人
+#user    =>  'xxxxxxxxx', #smtp登录帐号
+#pass    =>  'xxxxxxxxx', #smtp登录密码
+#});
 
 #发送验证码到邮箱
-$client->load("PostImgVerifycode",data=>{
-smtp    =>  'smtp.xxx.com', #邮箱的smtp地址
-port    =>  '25', #smtp服务器端口，默认25
-from    =>  'xxx@xxx.com', #发件人
-to      =>  'xxx@xxx.com', #收件人
-user    =>  'xxxxxxxxx', #smtp登录帐号
-pass    =>  'xxxxxxxxx', #smtp登录密码
-post_host => '127.0.0.1' , #本机公网IP地址，需要远程访问
-post_port => '1987'            , #提交验证码的链接地址中使用的端口，默认1987
-});
+#$client->load("PostImgVerifycode",data=>{
+#smtp    =>  'smtp.xxx.com', #邮箱的smtp地址
+#port    =>  '25', #smtp服务器端口，默认25
+#from    =>  'xxx@xxx.com', #发件人
+#to      =>  'xxx@xxx.com', #收件人
+#user    =>  'xxxxxxxxx', #smtp登录帐号
+#pass    =>  'xxxxxxxxx', #smtp登录密码
+#post_host => '127.0.0.1' , #本机公网IP地址，需要远程访问
+#post_port => '1987'            , #提交验证码的链接地址中使用的端口，默认1987
+#});
 
 #客户端进行登录
 $client->login();
@@ -80,7 +80,7 @@ my $msg = $_[1];
 #示例 >>> print "hello world";
 
 #加载群管理
-$client->load("GroupManage");
+#$client->load("GroupManage");
 #默认包含新人入群欢迎、成员离开提醒、群成员改名通知、限制发言频率、限制发图频率
 #其中加群欢迎 离群告别 群名片提醒 这些是没办法开关的
 #发送频率限制之类的 默认是不开启的 需要自己设置限制频率之类的
@@ -88,11 +88,11 @@ $client->load("GroupManage");
 #http://search.cpan.org/dist/Mojo-Webqq/doc/Webqq.pod#Mojo::Webqq::Plugin::GroupManage
 
 #smartQQ
-$client->load("SmartReply");
+#$client->load("SmartReply");
 #需要私聊或@机器人
 
 #对大神进行鄙视
-$client->load("FuckDaShen");
+#$client->load("FuckDaShen");
 
 #创建知识库
 $client->load("KnowledgeBase");
@@ -133,14 +133,14 @@ listen => [ {host=>"127.0.0.1",port=>5011}, ] , #监听的地址和端口，支�
 
 #开启本地irc server
 #需要先安装Mojo::IRC::Server::Chinese
-#$client->load("IRCShell",data=>{
-#  host=>"127.0.0.1", #默认0.0.0.0
-#  port=>6667, #默认6667
+$client->load("IRCShell",data=>{
+  host=>"127.0.0.1", #默认0.0.0.0
+  port=>6667, #默认6667
 #master_irc_user     #和qq匹配的irc user帐号，默认按照和qq号相同的user或者客户端ip是本机地址作为识别规则
 #load_friend         #0|1 默认是1 是否初始为每个好友生成irc虚拟帐号并加入频道 #我的好友
 #image_api           #兼容elimage图床api地址，将qq图片转为连接，方便在irc上查看图片，默认没有启用
                     #推荐依云的elimage http://img.vim-cn.com/
 });
-s
+
 #客户端开始运行
 $client->run();
