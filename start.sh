@@ -2,5 +2,5 @@
 SH=$1;
 >nohup.out;
 nohup ./$SH &
-tail -f nohup.out;
+tail nohup.out;
 exit;

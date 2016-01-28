@@ -5,6 +5,9 @@ HT=127.0.0.1
 US=hzz
 PW=11111111
 
+#删除本地文件
+rm -f /tmp/mojo_webqq_qrcode_2774984191.png
+
 #远程重启
 expect -c "
   spawn ssh ${US}@${HT}
@@ -19,10 +22,8 @@ expect -c "
     \"$*\" {send \"\r\"}
   }
   send \"cd /home/hzz/workspace/webqq/Mojo-Webqq-Scripts;./stop.sh login_dba.pl;./start.sh login_dba.pl;sleep 1;\rexit\r\"
+  expect eof
 "
-#删除本地文件
-rm -f /tmp/mojo_webqq_qrcode_2774984191.png
-sleep 1
 
 #获取二维码
 expect -c "
