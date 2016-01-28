@@ -18,8 +18,8 @@
   使用方法：
   sh start.sh/stop.sh login_dba.pl
 
-4.restart_login_dba.sh
-  自动调用stop.sh和start.sh重启进程，此处只针对login_dba.pl。
-  使用方法：
-  sh restart_login_dba.sh
+4.restart_login.sh
+  远程重启webqq并自动获取二维码打开。
+  需进行本地化设置。
+  sh restart_login.sh
 </pre>
