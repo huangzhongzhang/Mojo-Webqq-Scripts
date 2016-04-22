@@ -12,9 +12,6 @@ API_ADDR="127.0.0.1:5011"
 # 处理下编码，用于合并告警内容的标题和内容，即$2
 message=`echo -e "$2"|od -t x1 -A n -v -w10000 | tr " " %`
 
-# 获取gid，需要安装jd处理json
-#GID=`curl -s http://$API_ADDR/openqq/get_group_info | jq '.[0].gid'| tr -d '"'`
-
 # 这没什么好说的
 api_url="http://$API_ADDR/openqq/send_group_message?gnumber=$Gnumber&content=$message"
 

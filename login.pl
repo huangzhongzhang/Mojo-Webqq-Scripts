@@ -88,11 +88,11 @@ my $msg = $_[1];
 #http://search.cpan.org/dist/Mojo-Webqq/doc/Webqq.pod#Mojo::Webqq::Plugin::GroupManage
 
 #smartQQ
-#$client->load("SmartReply");
+$client->load("SmartReply");
 #需要私聊或@机器人
 
 #对大神进行鄙视
-#$client->load("FuckDaShen");
+$client->load("FuckDaShen");
 
 #创建知识库
 $client->load("KnowledgeBase");
