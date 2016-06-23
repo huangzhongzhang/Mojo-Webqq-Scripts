@@ -54,9 +54,6 @@ login_type  =>  "qrlogin", #"qrlogin"表示二维码登录
 #客户端进行登录
 $client->login();
 
-#客户端加载ShowMsg插件，用于打印发送和接收的消息到终端
-$client->load("ShowMsg");
-
 #主要用于主动更新好友、群、讨论组数据库，或者用于测试
 $client->on(receive_message=>sub{
 my $msg = $_[1];
@@ -71,65 +68,12 @@ my $msg = $_[1];
   $client->update_discuss() if $msg->content eq "update_discuss";
 });
 
-#显示perl文档
-#$client->load("Perlcode");
-#示例 perldoc -f|-v xxx
-
-#执行perl命令
-#$client->load("Perldoc");
-#示例 >>> print "hello world";
-
-#加载群管理
-#$client->load("GroupManage");
-#默认包含新人入群欢迎、成员离开提醒、群成员改名通知、限制发言频率、限制发图频率
-#其中加群欢迎 离群告别 群名片提醒 这些是没办法开关的
-#发送频率限制之类的 默认是不开启的 需要自己设置限制频率之类的
-#具体请参考代码以及以下链接
-#http://search.cpan.org/dist/Mojo-Webqq/doc/Webqq.pod#Mojo::Webqq::Plugin::GroupManage
-
-#smartQQ
-$client->load("SmartReply");
-#需要私聊或@机器人
-
-#对大神进行鄙视
-$client->load("FuckDaShen");
-
-#创建知识库
-$client->load("KnowledgeBase");
-#示例：learn 今天天气怎么样  天气很好
-#      学习  "你吃了吗"      当然吃了
-#      learn '哈哈 你真笨'   "就你聪明"
-#      del   今天天气怎么样
-#       删除  '哈哈 你真笨'
-
-#翻译
-$client->load("Translation");
-#示例：翻译 hello
-
-#手机归属地查询
-$client->load("MobileInfo");
-#示例：手机 1888888888
-
-#代码测试
-$client->load("ProgramCode");
-#示例：code|c>>>
-#        #include <stdio.h>
-#        int main() {
-#            printf("Hello World!\n");
-#            return 0;
-#        }
+#客户端加载ShowMsg插件，用于打印发送和接收的消息到终端
+$client->load("ShowMsg");
 
 #股票查询
 $client->load("StockInfo");
 #示例：股票 000001
-
-
-#提供HTTP API接口，方便获取客户端帐号、好友、群、讨论组信息，以及通过接口发送和接收好友消息、群消息、群临时消息和讨论组临时消息
-$client->load("Openqq",data=>{
-listen => [ {host=>"127.0.0.1",port=>5011}, ] , #监听的地址和端口，支持多个
-#auth   => sub {my($param,$controller) = @_},    #可选，认证回调函数，用于进行请求鉴权
-#post_api => 'http://xxxx',                      #可选，设置接收消息的上报接口
-});
 
 #开启本地irc server
 #需要先安装Mojo::IRC::Server::Chinese
@@ -140,6 +84,123 @@ $client->load("IRCShell",data=>{
 #load_friend         #0|1 默认是1 是否初始为每个好友生成irc虚拟帐号并加入频道 #我的好友
 #image_api           #兼容elimage图床api地址，将qq图片转为连接，方便在irc上查看图片，默认没有启用
                     #推荐依云的elimage http://img.vim-cn.com/
+});
+
+#显示perl文档
+#$client->load("Perlcode");
+#示例 perldoc -f|-v xxx
+
+#执行perl命令
+#$client->load("Perldoc");
+#示例 >>> print "hello world";
+
+#代码测试
+$client->load("ProgramCode");
+#示例：code|c>>>
+#        #include <stdio.h>
+#        int main() {
+#            printf("Hello World!\n");
+#            return 0;
+#        }
+
+#手机归属地查询
+$client->load("MobileInfo");
+#示例：手机 1888888888
+
+#创建知识库
+$client->load("KnowledgeBase2",data=>{
+    allow_group => ["PERL学习交流"],  #可选，允许插件的群，可以是群名称或群号码
+    ban_group   => ["私人群",123456], #可选，禁用该插件的群，可以是群名称或群号码
+    file => './KnowledgeBase2.txt', #数据库保存路径，纯文本形式，可以编辑
+    learn_command  => 'learn',     #可选，自定义学习指令关键字
+    delete_command =>'del',      #可选，自定义删除指令关键字
+    learn_operator => [12345,678910], #允许学习权限的操作人qq号
+    delete_operator => [12345,678910], #允许删除权限的操作人qq号
+    mode => 'fuzzy', # fuzzy|regex|exact 分别表示模糊|正则|精确, 默认模糊
+    check_time => 10, #默认10秒检查一次文件变更
+    show_keyword => 1, #消息是否包含触发关键字信息，默认开启
+});
+
+#示例：learn 今天天气怎么样  天气很好
+#      学习  "你吃了吗"      当然吃了
+#      learn '哈哈 你真笨'   "就你聪明"
+#      del   今天天气怎么样
+#       删除  '哈哈 你真笨'
+
+#对大神进行鄙视
+$client->load("FuckDaShen");
+
+#翻译
+$client->load("Translation");
+#示例：翻译 hello
+
+#猜灯谜
+$client->load("Riddle",data=>{
+    allow_group => ["PERL学习交流"],  #可选，允许插件的群，可以是群名称或群号码
+    ban_group   => ["私人群",123456], #可选，禁用该插件的群，可以是群名称或群号码
+    ban_user    => ["坏蛋",123456], #可选，禁用该插件的用户，可以是用户的显示名称或qq号码
+    command     => "猜谜",   #可选，触发关键字
+    apikey      => "xxxx",   #可选，参见 http://apistore.baidu.com/apiworks/servicedetail/440.html?qq-pf-to=pcqq.c2c
+    timeout     => 30, #等待答案的超时时间，超时后会自动公布答案
+});
+
+#显示油价
+$client->load("GasPrice",data=>{
+    allow_group => ["PERL学习交流"],  #可选，允许插件的群，可以是群名称或群号码
+    ban_group   => ["私人群",123456], #可选，禁用该插件的群，可以是群名称或群号码
+    command     => "油价",   #可选，触发关键字
+    apikey      => "xxxx",   #可选，参见 http://apistore.baidu.com/apiworks/servicedetail/710.html
+    msg_tail    => "消息尾巴", #可选
+    is_need_at  => 0, #是否需要艾特,默认值为0
+});
+
+#每日签到
+$client->load("Qiandao",data=>{
+    allow_group => ["PERL学习交流"],  #可选，允许插件的群，可以是群名称或群号码
+    ban_group   => ["私人群",123456], #可选，禁用该插件的群，可以是群名称或群号码
+    is_qiandao_on_login => 0 ,        #可选，是否登录时进行签到，默认值为0
+    qiandao_time => "09:30" ,         #可选，每日签到的时间，默认是 09:30
+});
+
+#加载群管理
+$client->load("GroupManage",data=>{
+    allow_group => ["PERL学习交流"],  #可选，允许插件的群，可以是群名称或群号码
+    ban_group   => ["私人群",123456], #可选，禁用该插件的群，可以是群名称或群号码
+    new_group_member => '欢迎新成员 @%s 入群[鼓掌][鼓掌][鼓掌]', #新成员入群欢迎语，%s会被替换成群成员名称
+    lose_group_member => '很遗憾 @%s 离开了本群[流泪][流泪][流泪]', #成员离群提醒
+    speak_limit => {#发送消息频率限制
+        period          => 10, #统计周期，单位是秒
+        warn_limit      => 8, #统计周期内达到该次数，发送警告信息
+        warn_message    => '@%s 警告, 您发言过于频繁，可能会被禁言或踢出本群', #警告内容
+        shutup_limit    => 10, #统计周期内达到该次数，成员会被禁言
+        shutup_time     => 600, #禁言时长
+        #kick_limit      => 15,   #统计周期内达到该次数，成员会被踢出本群
+    },
+    pic_limit => {#发图频率限制
+        period          => 600,
+        warn_limit      => 6,
+        warn_message   => '@%s 警告, 您发图过多，可能会被禁言或踢出本群',
+        shutup_limit    => 8,
+        kick_limit      => 10,
+    },
+    keyword_limit => {
+        period=> 600,
+        keyword=>[qw(fuck 傻逼 你妹 滚)],
+        warn_limit=>3,
+        shutup_limit=>5,
+        #kick_limit=>undef,
+    },
+});
+
+#smartQQ
+$client->load("SmartReply");
+#需要私聊或@机器人
+
+#提供HTTP API接口，方便获取客户端帐号、好友、群、讨论组信息，以及通过接口发送和接收好友消息、群消息、群临时消息和讨论组临时消息
+$client->load("Openqq",data=>{
+listen => [ {host=>"127.0.0.1",port=>5011}, ] , #监听的地址和端口，支持多个
+#auth   => sub {my($param,$controller) = @_},    #可选，认证回调函数，用于进行请求鉴权
+#post_api => 'http://xxxx',                      #可选，设置接收消息的上报接口
 });
 
 #客户端开始运行
