@@ -82,8 +82,7 @@ $client->load("IRCShell",data=>{
   port=>6667, #默认6667
 #master_irc_user     #和qq匹配的irc user帐号，默认按照和qq号相同的user或者客户端ip是本机地址作为识别规则
 #load_friend         #0|1 默认是1 是否初始为每个好友生成irc虚拟帐号并加入频道 #我的好友
-#image_api           #兼容elimage图床api地址，将qq图片转为连接，方便在irc上查看图片，默认没有启用
-                    #推荐依云的elimage http://img.vim-cn.com/
+  image_api=>"http://paste.perfi.wang/",      #兼容elimage图床api地址，将qq图片转为连接，方便在irc上查看图片，默认没有启用
 });
 
 #显示perl文档
