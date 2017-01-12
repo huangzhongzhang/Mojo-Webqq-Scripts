@@ -13,6 +13,6 @@ API_ADDR="127.0.0.1:5011"
 message=$(echo -e "$2" | od -t x1 -A n -v -w10000 | tr " " %)
 
 # 这没什么好说的
-api_url="http://$API_ADDR/openqq/send_group_message?gnumber=$Gnumber&content=$message"
+api_url="http://$API_ADDR/openqq/send_group_message?uid=$Gnumber&content=$message"
 
 curl $api_url
