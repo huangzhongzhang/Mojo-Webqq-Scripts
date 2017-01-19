@@ -1,20 +1,5 @@
-nohup.out
-将删除 .idea/Mojo-Webqq-Scripts.iml
-将删除 .idea/compiler.xml
-将删除 .idea/copyright/
-将删除 .idea/misc.xml
-将删除 .idea/modules.xml
-将删除 .idea/workspace.xml
-### Example user template template
-### Example user template
-
 # IntelliJ project files
 .idea
 *.iml
 out
 gen
-.idea/Mojo-Webqq-Scripts.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-.idea/workspace.xml
