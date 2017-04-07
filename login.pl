@@ -16,15 +16,11 @@ use Mojo::Webqq;
 
 # 推荐手机安装[QQ安全中心]APP，方便随时掌握自己帐号的情况
 
-# 新版本已无需指定qq号
-# my $qq = 284759461;
-
 # 初始化一个客户端对象，设置登录的qq号
 
 my $client=Mojo::Webqq->new(
 ua_debug    =>  0,         #是否打印详细的debug信息
 log_level   => "info",     #日志打印级别
-qq          =>  $qq,       #登录的qq帐号
 login_type  =>  "qrlogin", #"qrlogin"表示二维码登录
 );
 
@@ -108,7 +104,7 @@ $client->load("MobileInfo");
 #示例：手机 1888888888
 
 #创建知识库
-$client->load("KnowledgeBase2",data=>{
+$client->load("KnowledgeBase",data=>{
         allow_group     => [ "PERL学习交流" ], # 可选，允许插件的群，可以是群名称或群号码
         ban_group       => [ "私人群", 123456 ], # 可选，禁用该插件的群，可以是群名称或群号码
         file            => './KnowledgeBase2.txt', # 数据库保存路径，纯文本形式，可以编辑
