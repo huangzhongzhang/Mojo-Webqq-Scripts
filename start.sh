@@ -4,5 +4,5 @@ SH=$1
 rm -f /tmp/mojo_webqq_*
 nohup ./$SH &
 sleep 5
-./viewqr /tmp/mojo_webqq_qrcode_284759461.png
+./viewqr /tmp/mojo_webqq_qrcode_default.png
 exit
