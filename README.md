@@ -1,6 +1,4 @@
 # Mojo-Webqq-Scripts
-<h1>Mojo::Webqq项目使用示例</h1>
-
 ## Mojo::Webqq项目地址:
 [Mojo::Webqq](https://github.com/sjdy521/Mojo-Webqq)  
 感谢[灰灰](https://github.com/sjdy521)的倾情付出.
