@@ -207,7 +207,7 @@ $client->load("SmartReply", data => {
 
 # 提供HTTP API接口，方便获取客户端帐号、好友、群、讨论组信息，以及通过接口发送和接收好友消息、群消息、群临时消息和讨论组临时消息
 $client->load("Openqq",data=>{
-        listen => [ { host => "127.0.0.1", port => 5011 }, ], # 监听的地址和端口，支持多个
+        listen => [ { host => "0.0.0.0", port => 5011 }, ], # 监听的地址和端口，支持多个
         # auth   => sub {my($param,$controller) = @_},    # 可选，认证回调函数，用于进行请求鉴权
         # post_api => 'http://xxxx',                      # 可选，设置接收消息的上报接口
 });
