@@ -22,6 +22,7 @@ my $client=Mojo::Webqq->new(
 ua_debug    =>  0,         #是否打印详细的debug信息
 log_level   => "info",     #日志打印级别
 login_type  =>  "qrlogin", #"qrlogin"表示二维码登录
+poll_failure_count_max  =>  100, # 获取信息失败重试次数
 );
 
 # 注意: 腾讯可能已经关闭了帐号密码的登录方式，这种情况下只能使用二维码扫描登录
@@ -107,7 +108,7 @@ $client->load("MobileInfo");
 $client->load("KnowledgeBase",data=>{
         allow_group     => [ "PERL学习交流" ], # 可选，允许插件的群，可以是群名称或群号码
         ban_group       => [ "私人群", 123456 ], # 可选，禁用该插件的群，可以是群名称或群号码
-        file            => './KnowledgeBase2.txt', # 数据库保存路径，纯文本形式，可以编辑
+        file            => './KnowledgeBase.txt', # 数据库保存路径，纯文本形式，可以编辑
         learn_command   => 'learn', # 可选，自定义学习指令关键字
         delete_command  => 'del', # 可选，自定义删除指令关键字
         learn_operator  => [ 12345, 678910 ], # 允许学习权限的操作人qq号
