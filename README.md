@@ -1,7 +1,11 @@
 # Mojo-Webqq-Scripts
+
+* 此项目不再更新，只根据 Mojo::Webqq 的更新做对应的 bug 修复和更新。
+* 新项目请移步：[NPC](https://github.com/huangzhongzhang/NPC)。
+
 ## Mojo::Webqq项目地址:
 [Mojo::Webqq](https://github.com/sjdy521/Mojo-Webqq)  
-感谢[灰灰](https://github.com/sjdy521)的倾情付出.
+感谢[灰灰](https://github.com/sjdy521)的倾情付出。
 
 ```
 使用说明:
